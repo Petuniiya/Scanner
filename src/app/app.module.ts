@@ -17,6 +17,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatButtonModule } from '@angular/material/button';
 import { ZXingScannerModule } from '@zxing/ngx-scanner';
 import { FormatsDialogComponent } from './formats-dialog/formats-dialog.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { FormatsDialogComponent } from './formats-dialog/formats-dialog.componen
     AppRoutingModule,
     CommonModule,
     FormsModule,
+    BrowserAnimationsModule,
       // Material
     MatDialogModule,
     MatListModule,
