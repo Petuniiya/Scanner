@@ -20,16 +20,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'Scanner'`, () => {
+  it(`should have as title 'QRScanner'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('Scanner');
+    expect(app.title).toEqual('QRScanner');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('Scanner app is running!');
+    expect(compiled.querySelector('.content span').textContent).toContain('QRScanner app is running!');
   });
 });
