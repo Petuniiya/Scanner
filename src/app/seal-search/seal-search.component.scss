@@ -1,13 +1,15 @@
+@import '../../styles.scss';
+
 zxing-scanner {
     max-width: 100%;
-  }
+}
   
   header {
   
     position: sticky;
     top: 0;
     padding: 10px;
-    background: #333;
+    background: #02c3c3;
     display: flex;
   
     button {
@@ -76,4 +78,8 @@ zxing-scanner {
   
   h2 {
     padding: 0 16px;
+  }
+
+  ::ng-deep .p-dropdown{
+    width:90VW;
   }

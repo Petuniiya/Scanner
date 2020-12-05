@@ -1,0 +1,91 @@
+<header>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="text-center">Seal QR code Scanner</h1>
+            </div>
+            <div class="col-12 d-flex flex-column justify-content-center">
+                <p-dropdown [options]="availableDevices"  [(ngModel)]="deviceSelected"
+                    optionLabel="name" (onChange)="onDeviceSelectChange($event)" placeholder="Select Device">
+                </p-dropdown>
+            </div>
+        </div>
+    </div>
+</header>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12 d-flex mt-2">
+            <div class="p-field-checkbox mr-4">
+                <p-checkbox [(ngModel)]="tryHarder" inputId="tryHarder" (onChange)="toggleTryHarder()" name = "tryHarder"></p-checkbox>
+                <label for="tryHarder" class = "mb-0 ml-2"> Enable Try-harder </label>
+            </div>
+
+            <!--     <div class="p-field-checkbox mr-4" *ngIf="torchAvailable$ | async"> -->
+            <div class="p-field-checkbox mr-4">
+                <p-checkbox [(ngModel)]="torchEnabled" inputId="torch" (onChange)="toggleTorch()" name = "torch"></p-checkbox>
+                <label for="torch" class = "mb-0 ml-2"> Enable Torch </label>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            scanner placeholder
+           <!--  <zxing-scanner [torch]="torchEnabled" [device]="deviceCurrent" (deviceChange)="onDeviceChange($event)"
+                (scanSuccess)="onCodeResult($event)" [formats]="formatsEnabled" [tryHarder]="tryHarder"
+                (permissionResponse)="onHasPermission($event)" (camerasFound)="onCamerasFound($event)"
+                (torchCompatible)="onTorchCompatible($event)"></zxing-scanner> -->
+        </div>
+    </div>
+    <!-- <div class = "row" *ngIf="qrResultString"> -->
+    <div class = "row d-flex align-items-center" >
+        <div class = "col-10">
+            <p>Results:</p>
+            <p><strong>{{ qrResultString }}</strong></p>
+        <!--     <p>Name: {{sealData.name}}</p>
+            <p>Code: {{sealData.code}}</p>
+            <p>Active: {{sealData.code}}</p> -->
+        </div>
+        <div class = "col-2 float-right">
+            <button class = "btn btn-link" (click)="clearResult()">&times;</button>
+        </div>
+    </div>
+    <div class = "row">
+        <div class = "col-12">
+            <ng-container *ngIf="hasPermission === undefined">
+  
+                <h4>Waiting for permissions.</h4>
+              
+                <blockquote>
+                  If your device does not has cameras, no permissions will be asked.
+                </blockquote>
+              
+              </ng-container>
+              
+              <ng-container *ngIf="hasPermission === false">
+              
+                <h4>You denied the camera permission, we can't scan anything without it. 😪</h4>
+              
+              </ng-container>
+              
+              <ng-container *ngIf="hasDevices === undefined">
+              
+                <h4>Couldn't check for devices.</h4>
+              
+                <blockquote>
+                  This may be caused by some security error.
+                </blockquote>
+              
+              </ng-container>
+              
+              <ng-container *ngIf="hasDevices === false">
+              
+                <h4>No devices were found.</h4>
+              
+                <blockquote>
+                  I believe your device has no media devices attached to.
+                </blockquote>
+              
+              </ng-container>
+        </div>
+    </div>
+</div>

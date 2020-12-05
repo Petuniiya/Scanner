@@ -18,6 +18,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { ZXingScannerModule } from '@zxing/ngx-scanner';
 import { FormatsDialogComponent } from './formats-dialog/formats-dialog.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {DropdownModule} from 'primeng/dropdown';
+import {CheckboxModule} from 'primeng/checkbox';
+import { SealService } from './app.service';
 
 @NgModule({
   declarations: [
@@ -41,12 +44,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatInputModule,
     MatMenuModule,
     MatIconModule,
+    //PrimeNG
+    DropdownModule,
+    CheckboxModule,
 
   // Local
     ZXingScannerModule,
   ],
   entryComponents: [FormatsDialogComponent,],
-  providers: [],
+  providers: [SealService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -2,14 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { BarcodeFormat } from '@zxing/library';
 import { BehaviorSubject } from 'rxjs';
+import { SealService } from '../app.service';
 import { FormatsDialogComponent } from '../formats-dialog/formats-dialog.component';
 
 @Component({
   selector: 'app-seal-search',
-  templateUrl: './seal-search.component.html',
+ // templateUrl: './seal-search.component.html',
+  templateUrl: './seal-search-test.html',
   styleUrls: ['./seal-search.component.scss']
 })
 export class SealSearchComponent implements OnInit {
+
   availableDevices: MediaDeviceInfo[];
   deviceCurrent: MediaDeviceInfo;
   deviceSelected: string;
@@ -24,12 +27,16 @@ export class SealSearchComponent implements OnInit {
   hasDevices: boolean;
   hasPermission: boolean;
 
-  qrResultString: string;
+  qrResultString: string = "12234";
+  sealData:any;
 
   torchEnabled = false;
   torchAvailable$ = new BehaviorSubject<boolean>(false);
   tryHarder = false;
-  constructor(private readonly _dialog: MatDialog) { }
+  constructor(
+    private readonly _dialog: MatDialog,
+    private sealService:SealService
+    ) { }
   clearResult(): void {
     this.qrResultString = null;
   }
@@ -41,6 +48,9 @@ export class SealSearchComponent implements OnInit {
 
   onCodeResult(resultString: string) {
     this.qrResultString = resultString;
+    if (this.qrResultString){
+      this.sealData = this.sealService.getSealData(this.qrResultString)
+    }
   }
 
   onDeviceSelectChange(selected: string) {
@@ -58,20 +68,6 @@ export class SealSearchComponent implements OnInit {
     this.deviceCurrent = device || undefined;
   }
 
-  openFormatsDialog() {
-    const data = {
-      formatsEnabled: this.formatsEnabled,
-    };
-
-    this._dialog
-      .open(FormatsDialogComponent, { data })
-      .afterClosed()
-      .subscribe(x => {
-        if (x) {
-          this.formatsEnabled = x;
-        }
-      });
-  }
 
   onHasPermission(has: boolean) {
     this.hasPermission = has;
