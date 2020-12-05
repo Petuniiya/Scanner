@@ -4,10 +4,13 @@
             <div class="col-12">
                 <h1 class="text-center">Seal QR code Scanner</h1>
             </div>
-            <div class="col-12 d-flex flex-column justify-content-center">
-                <p-dropdown [options]="availableDevices"  [(ngModel)]="deviceSelected"
-                    optionLabel="name" (onChange)="onDeviceSelectChange($event)" placeholder="Select Device">
+            <div class="col-12 d-flex justify-content-center">
+                <p-dropdown [options]="availableDevices"  [(ngModel)]="deviceCurrent"
+                    optionLabel="label" (onChange)="onDeviceSelectChange($event)" placeholder="Select Device">
                 </p-dropdown>
+               <!--  <button class = "btn btn secondary" (click) = "onChangeCam()">
+                    change
+                </button> -->
             </div>
         </div>
     </div>
@@ -29,11 +32,10 @@
     </div>
     <div class="row">
         <div class="col-12">
-            scanner placeholder
-           <!--  <zxing-scanner [torch]="torchEnabled" [device]="deviceCurrent" (deviceChange)="onDeviceChange($event)"
+            <zxing-scanner [torch]="torchEnabled" [device]="deviceCurrent" (deviceChange)="onDeviceChange($event)"
                 (scanSuccess)="onCodeResult($event)" [formats]="formatsEnabled" [tryHarder]="tryHarder"
                 (permissionResponse)="onHasPermission($event)" (camerasFound)="onCamerasFound($event)"
-                (torchCompatible)="onTorchCompatible($event)"></zxing-scanner> -->
+                (torchCompatible)="onTorchCompatible($event)"></zxing-scanner>
         </div>
     </div>
     <!-- <div class = "row" *ngIf="qrResultString"> -->

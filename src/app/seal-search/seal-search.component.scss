@@ -11,6 +11,7 @@ zxing-scanner {
     padding: 10px;
     background: #02c3c3;
     display: flex;
+    z-index:1000;
   
     button {
       margin-left: 8px;

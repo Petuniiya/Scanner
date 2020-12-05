@@ -15,7 +15,7 @@ export class SealSearchComponent implements OnInit {
 
   availableDevices: MediaDeviceInfo[];
   deviceCurrent: MediaDeviceInfo;
-  deviceSelected: string;
+  deviceSelected: any;
 
   formatsEnabled: BarcodeFormat[] = [
     // BarcodeFormat.CODE_128,
@@ -43,6 +43,7 @@ export class SealSearchComponent implements OnInit {
 
   onCamerasFound(devices: MediaDeviceInfo[]): void {
     this.availableDevices = devices;
+    console.debug('devices ', this.availableDevices)
     this.hasDevices = Boolean(devices && devices.length);
   }
 
@@ -53,12 +54,22 @@ export class SealSearchComponent implements OnInit {
     }
   }
 
-  onDeviceSelectChange(selected: string) {
-    const selectedStr = selected || '';
-    if (this.deviceSelected === selectedStr) { return; }
-    this.deviceSelected = selectedStr;
-    const device = this.availableDevices.find(x => x.deviceId === selected);
-    this.deviceCurrent = device || undefined;
+  onDeviceSelectChange(event:any) {
+    let selected = event.value;
+    if (selected){
+      this.deviceCurrent = this.availableDevices.find(x => x.deviceId === selected.deviceId);
+    }
+    console.debug("dev selected ", this.deviceSelected)
+    console.debug("dev current ", this.deviceCurrent)
+   /*  console.debug("selected ", selected)
+    console.debug("dev selected ", this.deviceSelected)
+    const selectedStr = selected? selected?.value?.deviceId : undefined;
+    if (this.deviceSelected === selected) { return; }
+    this.deviceSelected = selected;
+    const device = this.availableDevices.find(x => x.deviceId === selected?.value?.deviceId);
+    console.debug('device cnst ', device)
+    this.deviceCurrent = device || undefined;  */
+   
   }
 
   onDeviceChange(device: MediaDeviceInfo) {
@@ -84,7 +95,20 @@ export class SealSearchComponent implements OnInit {
   toggleTryHarder(): void {
     this.tryHarder = !this.tryHarder;
   }
+
+  onChangeCam(){
+  //TO DO enable changing device on button click
+
+/*     if(this.availableDevices&&this.availableDevices.length>=2){
+      const deviceIndex = this.availableDevices.findIndex(i=>i.deviceId===this.deviceCurrent.deviceId)
+      const newIndex = deviceIndex===0?1:0;
+      this.deviceCurrent = this.availableDevices[newIndex];
+    }
+ */
+
+  }
   ngOnInit(): void {
   }
+
 
 }
